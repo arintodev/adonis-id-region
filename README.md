@@ -11,10 +11,10 @@ A reusable and scalable location module for AdonisJS 7 using TypeScript and Luci
 
 ## Installation
 
-Since this is an internal package, you can install it from your local directory or private npm registry:
+You can install this package directly from your GitHub repository:
 
 ```bash
-npm install @arintodev/adonis-location
+npm install arintodev/adonis-location
 ```
 
 ## Configuration

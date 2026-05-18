@@ -24,28 +24,64 @@ export async function configure(command: ConfigureCommand) {
   // So the package root is 2 levels up (build/) or we can resolve it relatively
   const packageRoot = path.resolve(__dirname, '../..')
   
+  const modelsSource = path.join(packageRoot, 'src', 'models')
   const migrationsSource = path.join(packageRoot, 'database', 'migrations')
   const seedersSource = path.join(packageRoot, 'database', 'seeders')
   const dataSource = path.join(packageRoot, 'data')
 
   // Resolve user project destination directories
+  const modelsDest = command.app.makePath('app', 'models')
   const migrationsDest = command.app.makePath('database', 'migrations')
   const seedersDest = command.app.makePath('database', 'seeders')
   const dataDest = command.app.makePath('data')
 
-  // 3. Copy Migrations
+  // 3. Copy Models
+  if (fs.existsSync(modelsSource)) {
+    try {
+      fs.mkdirSync(modelsDest, { recursive: true })
+      // Copy all model files except index.ts
+      const files = fs.readdirSync(modelsSource)
+      for (const file of files) {
+        if (file !== 'index.ts' && file !== 'index.js') {
+          const srcFile = path.join(modelsSource, file)
+          const destFile = path.join(modelsDest, file)
+          fs.copyFileSync(srcFile, destFile)
+        }
+      }
+      command.logger.success('Models copied successfully to app/models/')
+    } catch (error) {
+      command.logger.error('Failed to copy models')
+      console.error(error)
+    }
+  }
+
+  // 4. Copy Migrations with static timestamp prefix (000000000000x)
+  const migrationFiles = {
+    'create_countries_table.ts': '0000000000001_create_countries_table.ts',
+    'create_provinces_table.ts': '0000000000002_create_provinces_table.ts',
+    'create_regencies_table.ts': '0000000000003_create_regencies_table.ts',
+    'create_districts_table.ts': '0000000000004_create_districts_table.ts',
+    'create_villages_table.ts': '0000000000005_create_villages_table.ts',
+  }
+
   if (fs.existsSync(migrationsSource)) {
     try {
       fs.mkdirSync(migrationsDest, { recursive: true })
-      fs.cpSync(migrationsSource, migrationsDest, { recursive: true })
-      command.logger.success('Database migrations copied successfully')
+      for (const [originalName, newName] of Object.entries(migrationFiles)) {
+        const srcFile = path.join(migrationsSource, originalName)
+        const destFile = path.join(migrationsDest, newName)
+        if (fs.existsSync(srcFile)) {
+          fs.copyFileSync(srcFile, destFile)
+        }
+      }
+      command.logger.success('Database migrations copied successfully with 000000000000x prefix')
     } catch (error) {
       command.logger.error('Failed to copy database migrations')
       console.error(error)
     }
   }
 
-  // 4. Copy Seeders
+  // 5. Copy Seeders
   if (fs.existsSync(seedersSource)) {
     try {
       fs.mkdirSync(seedersDest, { recursive: true })
@@ -57,7 +93,7 @@ export async function configure(command: ConfigureCommand) {
     }
   }
 
-  // 5. Copy CSV Data Files
+  // 6. Copy CSV Data Files
   if (fs.existsSync(dataSource)) {
     try {
       fs.mkdirSync(dataDest, { recursive: true })
