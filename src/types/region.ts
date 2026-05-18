@@ -4,7 +4,7 @@ import type Regency from '../models/regency.js'
 import type District from '../models/district.js'
 import type Village from '../models/village.js'
 
-export interface LocationServiceContract {
+export interface RegionServiceContract {
   getCountries(): Promise<Country[]>
   getProvinces(countryId?: string): Promise<Province[]>
   getRegencies(provinceId: number): Promise<Regency[]>

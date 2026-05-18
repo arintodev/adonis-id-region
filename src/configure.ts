@@ -9,7 +9,7 @@ export async function configure(command: ConfigureCommand) {
   // 1. Register the provider in adonisrc.ts
   try {
     await codemods.updateRcFile((rcFile: any) => {
-      rcFile.addProvider('@arintodev/adonis-location/providers/location_provider')
+      rcFile.addProvider('@arintodev/adonis-indonesia-region/providers/location_provider')
     })
     command.logger.success('Provider registered successfully in adonisrc.ts')
   } catch (error) {
@@ -19,11 +19,11 @@ export async function configure(command: ConfigureCommand) {
 
   // 2. Resolve package source directories
   const __dirname = path.dirname(fileURLToPath(import.meta.url))
-  
+
   // In the built package, configure.js will reside in build/src/configure.js
   // So the package root is 2 levels up (build/) or we can resolve it relatively
   const packageRoot = path.resolve(__dirname, '../..')
-  
+
   const modelsSource = path.join(packageRoot, 'src', 'models')
   const migrationsSource = path.join(packageRoot, 'database', 'migrations')
   const seedersSource = path.join(packageRoot, 'database', 'seeders')
@@ -81,12 +81,18 @@ export async function configure(command: ConfigureCommand) {
     }
   }
 
-  // 5. Copy Seeders
+  // 5. Copy Seeders with 1000000000000_ prefix
   if (fs.existsSync(seedersSource)) {
     try {
       fs.mkdirSync(seedersDest, { recursive: true })
-      fs.cpSync(seedersSource, seedersDest, { recursive: true })
-      command.logger.success('Database seeders copied successfully')
+      const seederFiles = fs.readdirSync(seedersSource)
+      for (const file of seederFiles) {
+        let destName = file
+        const srcFile = path.join(seedersSource, file)
+        const destFile = path.join(seedersDest, destName)
+        fs.copyFileSync(srcFile, destFile)
+      }
+      command.logger.success('Database seeders copied successfully (renamed to 1000000000000_location_seeder.ts)')
     } catch (error) {
       command.logger.error('Failed to copy database seeders')
       console.error(error)

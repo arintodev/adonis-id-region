@@ -1,18 +1,18 @@
 {
-  "name": "@arintodev/adonis-location",
+  "name": "@arintodev/adonis-indonesia-region",
   "version": "1.0.0",
-  "description": "Reusable location module for AdonisJS 7",
+  "description": "Reusable region module for AdonisJS 7",
   "type": "module",
   "main": "build/index.js",
   "exports": {
     ".": "./build/index.js",
-    "./services": "./build/src/services/location_service.js",
-    "./services/location_service": "./build/src/services/location_service.js",
+    "./services": "./build/src/services/region_service.js",
+    "./services/region_service": "./build/src/services/region_service.js",
     "./models": "./build/src/models/index.js",
     "./validators": "./build/src/validators/address_validator.js",
-    "./types": "./build/src/types/location.js",
-    "./providers/location_provider": "./build/src/providers/location_provider.js",
-    "./providers": "./build/src/providers/location_provider.js"
+    "./types": "./build/src/types/region.js",
+    "./providers/region_provider": "./build/src/providers/region_provider.js",
+    "./providers": "./build/src/providers/region_provider.js"
   },
   "scripts": {
     "build": "tsc",

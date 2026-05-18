@@ -4,7 +4,7 @@ import Regency from '../models/regency.js'
 import District from '../models/district.js'
 import Village from '../models/village.js'
 
-export class LocationService {
+export class RegionService {
   public async getCountries() {
     return await Country.query().orderBy('name', 'asc')
   }
@@ -69,4 +69,4 @@ export class LocationService {
   }
 }
 
-export default new LocationService()
+export default new RegionService()
