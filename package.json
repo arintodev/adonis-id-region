@@ -1,0 +1,34 @@
+{
+  "name": "@arintodev/adonis-location",
+  "version": "1.0.0",
+  "description": "Reusable location module for AdonisJS 7",
+  "type": "module",
+  "main": "build/index.js",
+  "exports": {
+    ".": "./build/index.js",
+    "./services": "./build/src/services/location_service.js",
+    "./services/location_service": "./build/src/services/location_service.js",
+    "./models": "./build/src/models/index.js",
+    "./validators": "./build/src/validators/address_validator.js",
+    "./types": "./build/src/types/location.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "csv-parser": "^3.0.0"
+  },
+  "peerDependencies": {
+    "@adonisjs/core": "^6.0.0",
+    "@adonisjs/lucid": "^21.0.0",
+    "@vinejs/vine": "^3.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0",
+    "@types/node": "^20.0.0",
+    "@adonisjs/core": "^6.0.0",
+    "@adonisjs/lucid": "^21.0.0",
+    "@vinejs/vine": "^3.0.0"
+  }
+}
