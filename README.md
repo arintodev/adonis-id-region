@@ -1,4 +1,4 @@
-# @arintodev/adonis-indonesia-region
+# @arintodev/adonis-id-region
 
 A reusable and scalable region module for AdonisJS 7 using TypeScript and Lucid ORM. This package provides models, migrations, seeders, services, and validators for managing countries, provinces, regencies, districts, and villages.
 
@@ -14,7 +14,7 @@ A reusable and scalable region module for AdonisJS 7 using TypeScript and Lucid 
 You can install this package directly from your GitHub repository:
 
 ```bash
-npm install arintodev/adonis-indonesia-region
+npm install arintodev/adonis-id-region
 ```
 
 ## Configuration
@@ -22,7 +22,7 @@ npm install arintodev/adonis-indonesia-region
 Simply run the configure command in your AdonisJS project root:
 
 ```bash
-node ace configure @arintodev/adonis-indonesia-region
+node ace configure @arintodev/adonis-id-region
 ```
 
 This command will automatically:
@@ -48,7 +48,7 @@ node ace db:seed
 ```typescript
 import { inject } from '@adonisjs/core'
 import type { HttpContext } from '@adonisjs/core/http'
-import { RegionService } from '@arintodev/adonis-indonesia-region'
+import { RegionService } from '@arintodev/adonis-id-region'
 
 @inject()
 export default class RegionController {
@@ -71,7 +71,7 @@ export default class RegionController {
 
 ```typescript
 import type { HttpContext } from '@adonisjs/core/http'
-import { addressValidator } from '@arintodev/adonis-indonesia-region'
+import { addressValidator } from '@arintodev/adonis-id-region'
 
 export default class AddressController {
   public async store({ request, response }: HttpContext) {

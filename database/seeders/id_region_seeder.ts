@@ -3,7 +3,7 @@ import db from '@adonisjs/lucid/services/db'
 import fs from 'node:fs'
 import path from 'node:path'
 import csv from 'csv-parser'
-import { Country, Province, Regency, District, Village } from '@arintodev/adonis-indonesia-region/models'
+import { Country, Province, Regency, District, Village } from '@arintodev/adonis-id-region/models'
 
 export default class IndonesiaRegionSeeder extends BaseSeeder {
   private async parseCsv(filePath: string): Promise<any[]> {

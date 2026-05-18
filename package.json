@@ -1,5 +1,5 @@
 {
-  "name": "@arintodev/adonis-indonesia-region",
+  "name": "@arintodev/adonis-id-region",
   "version": "1.0.0",
   "description": "Reusable region module for AdonisJS 7",
   "type": "module",
