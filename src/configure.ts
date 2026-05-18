@@ -55,28 +55,20 @@ export async function configure(command: ConfigureCommand) {
     }
   }
 
-  // 4. Copy Migrations with static timestamp prefix (000000000000x)
-  const migrationFiles = {
-    'create_countries_table.ts': '0000000000001_create_countries_table.ts',
-    'create_provinces_table.ts': '0000000000002_create_provinces_table.ts',
-    'create_regencies_table.ts': '0000000000003_create_regencies_table.ts',
-    'create_districts_table.ts': '0000000000004_create_districts_table.ts',
-    'create_villages_table.ts': '0000000000005_create_villages_table.ts',
-  }
+  // 4. Copy Migrations with static timestamp prefix (0000000000001)
+  const migrationFile = '0000000000001_create_id_regions_tables.ts'
 
   if (fs.existsSync(migrationsSource)) {
     try {
       fs.mkdirSync(migrationsDest, { recursive: true })
-      for (const [originalName, newName] of Object.entries(migrationFiles)) {
-        const srcFile = path.join(migrationsSource, originalName)
-        const destFile = path.join(migrationsDest, newName)
-        if (fs.existsSync(srcFile)) {
-          fs.copyFileSync(srcFile, destFile)
-        }
+      const srcFile = path.join(migrationsSource, migrationFile)
+      const destFile = path.join(migrationsDest, migrationFile)
+      if (fs.existsSync(srcFile)) {
+        fs.copyFileSync(srcFile, destFile)
       }
-      command.logger.success('Database migrations copied successfully with 000000000000x prefix')
+      command.logger.success('Database migration copied successfully')
     } catch (error) {
-      command.logger.error('Failed to copy database migrations')
+      command.logger.error('Failed to copy database migration')
       console.error(error)
     }
   }
@@ -87,9 +79,8 @@ export async function configure(command: ConfigureCommand) {
       fs.mkdirSync(seedersDest, { recursive: true })
       const seederFiles = fs.readdirSync(seedersSource)
       for (const file of seederFiles) {
-        let destName = file
         const srcFile = path.join(seedersSource, file)
-        const destFile = path.join(seedersDest, destName)
+        const destFile = path.join(seedersDest, file)
         fs.copyFileSync(srcFile, destFile)
       }
       command.logger.success('Database seeders copied successfully')

@@ -37,8 +37,20 @@ After running the configuration, you can run migrations and seed the database:
 # Run migrations
 node ace migration:run
 
-# Seed geographical data
+# Seed geographical data (all regions including villages)
 node ace db:seed
+
+# Seed geographical data WITHOUT villages (useful for speed and smaller DB size)
+# On Linux/macOS:
+SEED_VILLAGES=false node ace db:seed
+
+# On Windows (PowerShell):
+$env:SEED_VILLAGES="false"; node ace db:seed
+
+# Alternatively, add this to your .env file:
+# SEED_VILLAGES=false
+# or
+# SKIP_VILLAGES=true
 ```
 
 ## Example API Usage

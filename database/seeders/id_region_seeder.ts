@@ -70,20 +70,26 @@ export default class IndonesiaRegionSeeder extends BaseSeeder {
       }
 
       // 5. Seed Villages (can be very large, use chunking)
-      const villagesFile = path.join(dataPath, 'villages.csv')
-      if (fs.existsSync(villagesFile)) {
-        const villages = await this.parseCsv(villagesFile)
-        if (villages.length > 0) {
-          const chunkSize = 1000
-          for (let i = 0; i < villages.length; i += chunkSize) {
-            const chunk = villages.slice(i, i + chunkSize)
-            await Village.updateOrCreateMany('id', chunk, { client: trx })
-            if ((i + chunkSize) % 10000 === 0) {
-              console.log(`Seeded ${Math.min(i + chunkSize, villages.length)} villages...`)
+      const shouldSeedVillages = process.env.SEED_VILLAGES !== 'false' && process.env.SKIP_VILLAGES !== 'true'
+
+      if (shouldSeedVillages) {
+        const villagesFile = path.join(dataPath, 'villages.csv')
+        if (fs.existsSync(villagesFile)) {
+          const villages = await this.parseCsv(villagesFile)
+          if (villages.length > 0) {
+            const chunkSize = 1000
+            for (let i = 0; i < villages.length; i += chunkSize) {
+              const chunk = villages.slice(i, i + chunkSize)
+              await Village.updateOrCreateMany('id', chunk, { client: trx })
+              if ((i + chunkSize) % 10000 === 0) {
+                console.log(`Seeded ${Math.min(i + chunkSize, villages.length)} villages...`)
+              }
             }
+            console.log(`Seeded ${villages.length} villages in total`)
           }
-          console.log(`Seeded ${villages.length} villages in total`)
         }
+      } else {
+        console.log('Skipped seeding villages (configured via SEED_VILLAGES=false or SKIP_VILLAGES=true)')
       }
 
       await trx.commit()
