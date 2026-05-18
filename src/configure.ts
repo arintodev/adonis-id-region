@@ -92,7 +92,7 @@ export async function configure(command: ConfigureCommand) {
         const destFile = path.join(seedersDest, destName)
         fs.copyFileSync(srcFile, destFile)
       }
-      command.logger.success('Database seeders copied successfully (renamed to 1000000000000_location_seeder.ts)')
+      command.logger.success('Database seeders copied successfully')
     } catch (error) {
       command.logger.error('Failed to copy database seeders')
       console.error(error)
