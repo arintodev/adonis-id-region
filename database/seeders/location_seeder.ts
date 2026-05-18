@@ -3,11 +3,7 @@ import db from '@adonisjs/lucid/services/db'
 import fs from 'node:fs'
 import path from 'node:path'
 import csv from 'csv-parser'
-import Country from '../../src/models/country.js'
-import Province from '../../src/models/province.js'
-import Regency from '../../src/models/regency.js'
-import District from '../../src/models/district.js'
-import Village from '../../src/models/village.js'
+import { Country, Province, Regency, District, Village } from '@arintodev/adonis-location/models'
 
 export default class LocationSeeder extends BaseSeeder {
   private async parseCsv(filePath: string): Promise<any[]> {

@@ -19,37 +19,27 @@ npm install @arintodev/adonis-location
 
 ## Configuration
 
-1. **Register the Provider**
-   In your AdonisJS project, open `adonisrc.ts` and add the provider:
+Simply run the configure command in your AdonisJS project root:
 
-   ```typescript
-   export default defineConfig({
-     providers: [
-       // ...
-       () => import('@arintodev/adonis-location/build/src/providers/location_provider.js')
-     ]
-   })
-   ```
+```bash
+node ace configure @arintodev/adonis-location
+```
 
-2. **Run Migrations**
-   Because migrations are shipped within the package, you need to execute them. If you prefer, copy them or run them directly if your setup allows package migrations. (Example if executing from project root):
-   
-   ```bash
-   node ace migration:run
-   ```
+This command will automatically:
+1. Register the **LocationProvider** inside your `adonisrc.ts` file.
+2. Copy the **database migrations** to your project (`database/migrations/`).
+3. Copy the **database seeders** to your project (`database/seeders/`).
+4. Copy all **CSV data files** to your project (`data/`).
 
-3. **Seeding Data**
-   Prepare your `.csv` data files in a `data` folder at the root of your project:
-   - `data/countries.csv`
-   - `data/provinces.csv`
-   - `data/regencies.csv`
-   - `data/districts.csv`
-   - `data/villages.csv`
-   
-   Then run the seeder:
-   ```bash
-   node ace db:seed
-   ```
+After running the configuration, you can run migrations and seed the database:
+
+```bash
+# Run migrations
+node ace migration:run
+
+# Seed geographical data
+node ace db:seed
+```
 
 ## Example API Usage
 
