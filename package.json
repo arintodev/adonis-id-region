@@ -21,15 +21,15 @@
     "csv-parser": "^3.0.0"
   },
   "peerDependencies": {
-    "@adonisjs/core": "^6.0.0 || ^7.0.0",
-    "@adonisjs/lucid": "^21.0.0",
-    "@vinejs/vine": "^3.0.0"
+    "@adonisjs/core": ">=6.0.0",
+    "@adonisjs/lucid": ">=20.0.0",
+    "@vinejs/vine": ">=2.0.0"
   },
   "devDependencies": {
     "typescript": "^5.4.0",
     "@types/node": "^20.0.0",
-    "@adonisjs/core": "^6.0.0 || ^7.0.0",
-    "@adonisjs/lucid": "^21.0.0",
-    "@vinejs/vine": "^3.0.0"
+    "@adonisjs/core": ">=6.0.0",
+    "@adonisjs/lucid": ">=20.0.0",
+    "@vinejs/vine": ">=2.0.0"
   }
 }
