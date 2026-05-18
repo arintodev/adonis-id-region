@@ -9,7 +9,7 @@ export async function configure(command: ConfigureCommand) {
   // 1. Register the provider in adonisrc.ts
   try {
     await codemods.updateRcFile((rcFile: any) => {
-      rcFile.addProvider('@arintodev/adonis-indonesia-region/providers/location_provider')
+      rcFile.addProvider('@arintodev/adonis-indonesia-region/providers/region_provider')
     })
     command.logger.success('Provider registered successfully in adonisrc.ts')
   } catch (error) {
