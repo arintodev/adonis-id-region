@@ -10,7 +10,9 @@
     "./services/location_service": "./build/src/services/location_service.js",
     "./models": "./build/src/models/index.js",
     "./validators": "./build/src/validators/address_validator.js",
-    "./types": "./build/src/types/location.js"
+    "./types": "./build/src/types/location.js",
+    "./providers/location_provider": "./build/src/providers/location_provider.js",
+    "./providers": "./build/src/providers/location_provider.js"
   },
   "scripts": {
     "build": "tsc",
