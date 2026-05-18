@@ -6,7 +6,7 @@ export default class extends BaseSchema {
   async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.string('id', 2).primary() // ISO alpha-2
-      table.string('alpha3', 3).notNullable()
+      table.string('alpha_3', 3).notNullable()
       table.string('numeric', 3).notNullable()
       table.string('name').notNullable()
       table.timestamps()
