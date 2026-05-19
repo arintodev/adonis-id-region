@@ -56,13 +56,14 @@ export async function configure(command: ConfigureCommand) {
   }
 
   // 4. Copy Migrations with static timestamp prefix (0000000000001)
-  const migrationFile = '0000000000001_create_id_regions_tables.ts'
+  const migrationFile = 'create_id_regions_tables.ts'
 
   if (fs.existsSync(migrationsSource)) {
     try {
       fs.mkdirSync(migrationsDest, { recursive: true })
       const srcFile = path.join(migrationsSource, migrationFile)
-      const destFile = path.join(migrationsDest, migrationFile)
+      const dateNow = new Date().getTime()
+      const destFile = path.join(migrationsDest, `${dateNow}_${migrationFile}`)
       if (fs.existsSync(srcFile)) {
         fs.copyFileSync(srcFile, destFile)
       }
